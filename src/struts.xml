@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<!--设置spring的创建对象方式  -->
+	<constant name="struts.objectFactory" value="spring"></constant>
+	<package name="BuildingDataAction" extends="struts-default" namespace="/BuildingDataAction">
+		<action name="saveBuildingBasicData" class="org.gb.action.BuildingDataAction" method="saveBuildingBasicData">
+			<result name="success">/jsp/buildingBasicData.jsp</result> 
+		</action>
+		<action name="getBuilding" class="org.gb.action.BuildingDataAction" method="getBuilding">
+			<result name="success">/jsp/landUtilize.jsp</result> 
+			<result name="success">/jsp/main.jsp</result> 
+		</action>
+		<action name="getBuildingByNature" class="org.gb.action.BuildingDataAction" method="getBuildingByNature">
+			<result name="success">/jsp/landUtilize.jsp</result> 
+		</action>
+		<action name="getBuildingData" class="org.gb.action.BuildingDataAction" method="getBuildingData">
+			<result name="success">/jsp/main.jsp</result> 
+		</action>
+		<action name="getDesignEvaluate" class="org.gb.action.BuildingDataAction" method="getDesignEvaluate">
+			<result name="success">/jsp/main.jsp</result> 
+		</action>
+		<action name="saveQ1Data" class="org.gb.action.BuildingDataAction" method="saveQ1Data">
+			<result name="success">/jsp/landUtilize.jsp</result> 
+		</action>
+		<action name="saveQ1Data" class="org.gb.action.BuildingDataAction" method="saveQ1Data">
+			<result name="success">/jsp/outdoorEnvironment.jsp</result> 
+		</action>
+	</package>
+
+	
+
+
+</struts>

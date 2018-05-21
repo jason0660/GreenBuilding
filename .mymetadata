@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="GreenBuilding"
+  id="myeclipse.1454479451343"
+  context-root="/GreenBuilding"
+  j2ee-spec="5.0"
+  archive="GreenBuilding.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

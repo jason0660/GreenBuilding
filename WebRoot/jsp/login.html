@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8"/>
+    <title>IT小镇</title>
+{#    <meta name="description" content="">#}
+{#    <meta name="keywords" content="">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=yes">#}
+{#    <meta http-equiv="Content-Type" content="text/html" >#}
+    <!-- BOOTSTRAP STYLES-->
+    <link href="/static/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FONTAWESOME STYLES--> 
+    <link href="/static/css/font-awesome.css" rel="stylesheet"/>
+    <!-- GOOGLE FONTS-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+
+</head>
+<body style="background-color: #E2E2E2;">
+    <div class="container">
+        <div class="row text-center " style="padding-top:100px;">
+            <div class="col-md-12">
+                <img src="/static/img/logo-invoice.png"/>
+            </div>
+        </div>
+        <div class="row ">
+
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+
+                <div class="panel-body">
+                    <form role="form" method="post">
+                        <hr/>
+                        <h5>请输入登录信息</h5>
+                        <br/>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+                            <input type="text" class="form-control" name="username" placeholder="请输入用户名"/>
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="password" class="form-control" name="password" placeholder="请输入密码"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-inline"><input type="checkbox"/> 保存用户名密码</label>
+                            <span class="pull-right">
+                                <a href="index.html">忘记密码 ? </a>
+                            </span>
+                        </div>
+{#                        <a type="submit" href="index.html" class="btn btn-primary ">用户登录</a>#}
+                        <input type="submit" class="btn btn-primary" value="用户登录" />
+                        <span style="color: red">{{ error_msg }}</span>
+                        <hr/>
+{#                        Not register ? <a href="index.html">click here </a> or go to <a href="index.html">Home</a>#}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

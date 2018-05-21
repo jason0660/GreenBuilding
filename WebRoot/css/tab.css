@@ -1,0 +1,41 @@
+
+.tabs { width: 100%; height: 100%; font-size: 0px;}
+
+.tab-label { 
+	display: inline-block; 
+	height: 36px; 
+	font: italic 14px/36px cambria; 
+	color: #333; background: #ACA; padding: 0px 25px;
+	border-radius: 10px 10px 0 0; margin-right: -5px; cursor: pointer; }
+	
+.tab-label:hover { background: #00E3E3; }
+
+.tab-radio { position: absolute; display: none; }
+
+.tab-radio:checked + label { background: #003D79; color: #fff; }
+
+.tabs .tab-radio:nth-of-type(3):checked ~ .panels .panel-item:nth-child(3) { 
+	opacity: 1; -o-transition: 3s; -ms-transition: 3s; -moz-transition: 3s; -webkit-transition: 3s; 
+	}
+.tabs .tab-radio:nth-of-type(2):checked ~ .panels .panel-item:nth-child(2) { 
+	opacity: 1; -o-transition: 3s; -ms-transition: 3s; -moz-transition: 3s; -webkit-transition: 3s; 
+	}
+.tabs .tab-radio:nth-of-type(1):checked ~ .panels .panel-item:nth-child(1) { 
+	opacity: 1; -o-transition: 3s; -ms-transition: 3s; -moz-transition: 3s; -webkit-transition: 3s; 
+	}
+	
+.panels { 
+	width: 100%; 
+	height: 100%; 
+	padding: 0 0 0 0;
+	border-radius: 0 10px 10px 10px; 
+	background: #F0F0F0; 
+	font-size: 14px; 
+	}
+	
+
+.tabs .panel-item.hidden {
+	display:none;
+}
+
+/*# sourceMappingURL=tab.css.map */

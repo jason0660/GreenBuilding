@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://cxf.apache.org/jaxws
+    http://cxf.apache.org/schemas/jaxws.xsd">
+
+
+
+	<!-- sessionFactory配置 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:hibernate.cfg.xml">
+		</property>
+	</bean>
+ 
+ 
+ 	<!-- Dao配置 -->
+ 	<bean id="buildingDataDao" class="org.gb.dao.Impls.BuildingDataDaoImpl" scope="prototype">
+  		<property name="sessionFactory" ref="sessionFactory"></property>
+ 	</bean>
+ 	
+ 	<!-- 配置action -->
+	<!-- BuildingDataAction -->
+	<bean id="BuildingDataAction" class="org.gb.action.BuildingDataAction" scope="prototype">
+		<property name="buildingDataDao" ref="buildingDataDao"></property>
+	</bean>
+ 	
+ 	
+ 
+	
+	<!-- 创建事务管理器(spring针对hibernate实现的事务管理的切面类) -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 事务的通知类型 -->
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+	<tx:attributes>
+	<tx:method name="add*" propagation="REQUIRED"/>
+	<tx:method name="update*" propagation="REQUIRED"/>
+	<tx:method name="delete*" propagation="REQUIRED"/>
+	<tx:method name="*" read-only="true" />
+	</tx:attributes>
+	</tx:advice>
+	<!-- 将事务管理规则的切面应用到对应的切入点 -->
+	<aop:config>
+	<aop:pointcut expression="execution(* org.gb.dao..*.*(..))" id="transactionPointCut"/>
+	<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionPointCut"/>
+	</aop:config>
+	
+</beans>
