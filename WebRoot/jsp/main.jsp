@@ -58,7 +58,14 @@
 	        			document.getElementById("buildingNature").innerHTML="公共建筑";
 	        		if(data[3]=="3")
 	        			document.getElementById("buildingNature").innerHTML="具有居住和公共功能的单体建筑";
-	        		document.getElementById("buildingLevel").innerHTML=data[4];
+	        		if(data[4]=="0")
+	        			document.getElementById("buildingLevel").innerHTML="未达标";
+	        		if(data[4]=="1")
+	        			document.getElementById("buildingLevel").innerHTML="一星级";
+	        		if(data[4]=="2")
+	        			document.getElementById("buildingLevel").innerHTML="二星级";
+	        		if(data[4]=="3")
+	        			document.getElementById("buildingLevel").innerHTML="三星级";
 	        	},
 	        	error: function(XMLResponse){
 	        		alert("qError!");

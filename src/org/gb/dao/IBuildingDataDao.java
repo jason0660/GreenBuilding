@@ -68,6 +68,20 @@ public interface IBuildingDataDao {
 	public void updateGbDesignevaluate(GbQ5 gbQ5);
 	
 	/**
+	 * 计算建筑评估得分
+	 * @return
+	 */
+	public void calculateBuildingScore(GbQ1 gbQ1);
+	
+	public void calculateBuildingScore(GbQ2 gbQ2);
+	
+	public void calculateBuildingScore(GbQ3 gbQ3);
+	
+	public void calculateBuildingScore(GbQ4 gbQ4);
+	
+	public void calculateBuildingScore(GbQ5 gbQ5);
+	
+	/**
 	 * 根据ID查询建筑
 	 * @return
 	 */

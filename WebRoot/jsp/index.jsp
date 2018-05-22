@@ -61,10 +61,10 @@
 	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/outdoorEnvironment.jsp')">室外环境</a>
 	                        </li>
 	                        <li>
-	                            <a href="#">交通设施与公共服务</a>
+	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/trafficFacilityPublicService.jsp')">交通设施与公共服务</a>
 	                        </li>
 	                        <li>
-	                            <a href="#">场地设计与场地生态</a>
+	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/siteDesignAndFieldEcology.jsp')">场地设计与场地生态</a>
 	                        </li>
 	                    </ul>
 	                </li>

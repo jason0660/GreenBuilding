@@ -79,6 +79,11 @@
 			var swhjdf=0;
 			var jtssyggfwdf=0;
 			var cdsjycdstdf=0;
+			jzid = document.getElementById('jzmc_jz').value;
+			if(jzid == ""){
+				alert("请选择建筑名称！");
+				return;
+			}
 			var A=document.getElementById("A").value;
 			if(A=="")
 			{
@@ -289,7 +294,11 @@
 			var swhjdf=0;
 			var jtssyggfwdf=0;
 			var cdsjycdstdf=0;
-			
+			jzid = document.getElementById('jzmc_gg').value;
+			if(jzid == ""){
+				alert("请选择建筑名称！");
+				return;
+			}
 			var radio_R=document.getElementsByName("radio_R");
 			for(var i=0;i<radio_R.length;i++){
 				if(radio_R[i].checked==true){

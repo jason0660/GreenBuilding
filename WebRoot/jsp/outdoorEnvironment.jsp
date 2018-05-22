@@ -46,7 +46,7 @@
 			var jtssyggfwdf=0;
 			var cdsjycdstdf=0; 
 			if(jzid == ""){
-				alert("请输入建筑名称！");
+				alert("请选择建筑名称！");
 				return;
 			}
 			
@@ -136,9 +136,9 @@
             <!-- <h1 class="page-subhead-line"></h1> -->      
         </div>     
     </div>
-	<div class="tabs" style="border:0px solid #F60;margin:5px 0px; width:100%; height:100%;background: #FFF;">		             
+	<!-- <div class="tabs" style="border:0px solid #F60;margin:5px 0px; width:100%; height:100%;background: #FFF;">		             
         <div class="panels" style="border:0px solid #F60;width:100%; height:100%;background: #FFF;">
-            <div data-tabname="tab2" class="panel-item" style="padding:0px 0px;background: #FFF;">
+            <div data-tabname="tab2" class="panel-item" style="padding:0px 0px;background: #FFF;"> -->
             	<div style="border:0px solid #F00;">
 			    	<table>
 			    		<tr>
@@ -206,9 +206,9 @@
 				<div style="border:0px solid #F90;height:30px;float:right;">
 			    	<input type="button" style="width:65px;height:25px;" onclick="saveData();" value="保存"></input>
 			    </div>
-            </div>
+            <!-- </div>
         </div>
-    </div>
+    </div> -->
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->
 <script src="/GreenBuilding/js/jquery-1.10.2.js"></script>

@@ -195,6 +195,7 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 				GbBuilding gbBuilding = findGbBuildingById(gbQ1.getGbBuilding().getBuildingId());
 				GbDesignevaluate d = new GbDesignevaluate();
 				d.setId(UUID.randomUUID().toString().replace("-", ""));
+				d.setNature(gbQ1.getGbBuilding().getBuildingNature());
 				d.setW1(w1);
 				d.setGbBuilding(gbBuilding);
 				getHibernateTemplate().save(d);
@@ -204,6 +205,7 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 			log.error("save failed", re);
 			throw re;
 		}
+		calculateBuildingScore(gbQ1);
 	}
 	
 	public void updateGbDesignevaluate(GbQ2 gbQ2){
@@ -236,6 +238,7 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 				GbBuilding gbBuilding = findGbBuildingById(gbQ2.getGbBuilding().getBuildingId());
 				GbDesignevaluate d = new GbDesignevaluate();
 				d.setId(UUID.randomUUID().toString().replace("-", ""));
+				d.setNature(gbQ2.getGbBuilding().getBuildingNature());
 				d.setW2(w2);
 				d.setGbBuilding(gbBuilding);
 				getHibernateTemplate().save(d);
@@ -274,6 +277,7 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 				GbBuilding gbBuilding = findGbBuildingById(gbQ3.getGbBuilding().getBuildingId());
 				GbDesignevaluate d = new GbDesignevaluate();
 				d.setId(UUID.randomUUID().toString().replace("-", ""));
+				d.setNature(gbQ3.getGbBuilding().getBuildingNature());
 				d.setW3(w3);
 				d.setGbBuilding(gbBuilding);
 				getHibernateTemplate().save(d);
@@ -309,6 +313,7 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 				GbBuilding gbBuilding = findGbBuildingById(gbQ4.getGbBuilding().getBuildingId());
 				GbDesignevaluate d = new GbDesignevaluate();
 				d.setId(UUID.randomUUID().toString().replace("-", ""));
+				d.setNature(gbQ4.getGbBuilding().getBuildingNature());
 				d.setW4(w4);
 				d.setGbBuilding(gbBuilding);
 				getHibernateTemplate().save(d);
@@ -350,6 +355,7 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 				GbBuilding gbBuilding = findGbBuildingById(gbQ5.getGbBuilding().getBuildingId());
 				GbDesignevaluate d = new GbDesignevaluate();
 				d.setId(UUID.randomUUID().toString().replace("-", ""));
+				d.setNature(gbQ5.getGbBuilding().getBuildingNature());
 				d.setW5(w5);
 				d.setGbBuilding(gbBuilding);
 				getHibernateTemplate().save(d);
@@ -357,6 +363,495 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 			log.debug("save successful");
 		}catch (RuntimeException re) {
 			log.error("save failed", re);
+			throw re;
+		}
+	}
+	
+	/**
+	 * 计算建筑评估得分
+	 * @return
+	 */
+	public void calculateBuildingScore(GbQ1 gbQ1){
+		BigDecimal w1 = new BigDecimal(0);
+		BigDecimal w2 = new BigDecimal(0);
+		BigDecimal w3 = new BigDecimal(0);
+		BigDecimal w4 = new BigDecimal(0);
+		BigDecimal w5 = new BigDecimal(0);
+		BigDecimal Q1 = new BigDecimal(0);
+		BigDecimal Q2 = new BigDecimal(0);
+		BigDecimal Q3 = new BigDecimal(0);
+		BigDecimal Q4 = new BigDecimal(0);
+		BigDecimal Q5 = new BigDecimal(0);
+		BigDecimal Q = new BigDecimal(0);
+		String nature;
+		String buildingLevel="";
+		try{
+			List<GbDesignevaluate> dList = findGbDesignevaluateById(gbQ1.getGbBuilding().getBuildingId());			
+			if(dList!=null){//已有设计评估得分记录则更新，否则新增设计评估得分记录
+				GbDesignevaluate de = dList.get(0);
+				w1 = de.getW1();
+				w2 = de.getW2();
+				w3 = de.getW3();
+				w4 = de.getW4();
+				w5 = de.getW5();
+				nature = de.getNature();
+				if(nature.equals("1")){//居住建筑
+					BigDecimal w1_xs = BigDecimal.valueOf(0.21);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					BigDecimal w2_xs = BigDecimal.valueOf(0.24);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					BigDecimal w3_xs = BigDecimal.valueOf(0.20);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					BigDecimal w4_xs = BigDecimal.valueOf(0.17);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					BigDecimal w5_xs = BigDecimal.valueOf(0.18);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
+				if(nature.equals("2")){//公共建筑
+					BigDecimal w1_xs = BigDecimal.valueOf(0.16);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					BigDecimal w2_xs = BigDecimal.valueOf(0.28);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					BigDecimal w3_xs = BigDecimal.valueOf(0.18);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					BigDecimal w4_xs = BigDecimal.valueOf(0.19);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					BigDecimal w5_xs = BigDecimal.valueOf(0.19);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
+				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
+				if(Q.doubleValue()>=80)
+					buildingLevel = "3";
+				if(Q.doubleValue()>=60 && Q.doubleValue()<80)
+					buildingLevel = "2";
+				if(Q.doubleValue()>=50 && Q.doubleValue()<60)
+					buildingLevel = "1";
+				if(Q.doubleValue()<40)
+					buildingLevel = "0";
+				
+				GbBuilding b = findGbBuildingById(gbQ1.getGbBuilding().getBuildingId());
+				b.setBuildingLevel(buildingLevel);
+				getHibernateTemplate().update(b);
+			}
+		}catch (RuntimeException re) {
+			throw re;
+		}
+	}
+	
+	public void calculateBuildingScore(GbQ2 gbQ2){
+		BigDecimal w1 = new BigDecimal(0);
+		BigDecimal w2 = new BigDecimal(0);
+		BigDecimal w3 = new BigDecimal(0);
+		BigDecimal w4 = new BigDecimal(0);
+		BigDecimal w5 = new BigDecimal(0);
+		BigDecimal Q1 = new BigDecimal(0);
+		BigDecimal Q2 = new BigDecimal(0);
+		BigDecimal Q3 = new BigDecimal(0);
+		BigDecimal Q4 = new BigDecimal(0);
+		BigDecimal Q5 = new BigDecimal(0);
+		BigDecimal Q = new BigDecimal(0);
+		String nature;
+		String buildingLevel="";
+		try{
+			List<GbDesignevaluate> dList = findGbDesignevaluateById(gbQ2.getGbBuilding().getBuildingId());			
+			if(dList!=null){//已有设计评估得分记录则更新，否则新增设计评估得分记录
+				GbDesignevaluate de = dList.get(0);
+				w1 = de.getW1();
+				w2 = de.getW2();
+				w3 = de.getW3();
+				w4 = de.getW4();
+				w5 = de.getW5();
+				nature = de.getNature();
+				if(nature.equals("1")){//居住建筑
+					BigDecimal w1_xs = BigDecimal.valueOf(0.21);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					BigDecimal w2_xs = BigDecimal.valueOf(0.24);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					BigDecimal w3_xs = BigDecimal.valueOf(0.20);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					BigDecimal w4_xs = BigDecimal.valueOf(0.17);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					BigDecimal w5_xs = BigDecimal.valueOf(0.18);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
+				if(nature.equals("2")){//公共建筑
+					BigDecimal w1_xs = BigDecimal.valueOf(0.16);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					BigDecimal w2_xs = BigDecimal.valueOf(0.28);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					BigDecimal w3_xs = BigDecimal.valueOf(0.18);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					BigDecimal w4_xs = BigDecimal.valueOf(0.19);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					BigDecimal w5_xs = BigDecimal.valueOf(0.19);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
+				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
+				if(Q.doubleValue()>=80)
+					buildingLevel = "3";
+				if(Q.doubleValue()>=60 && Q.doubleValue()<80)
+					buildingLevel = "2";
+				if(Q.doubleValue()>=50 && Q.doubleValue()<60)
+					buildingLevel = "1";
+				if(Q.doubleValue()<40)
+					buildingLevel = "0";
+				
+				GbBuilding b = findGbBuildingById(gbQ2.getGbBuilding().getBuildingId());
+				b.setBuildingLevel(buildingLevel);
+				getHibernateTemplate().update(b);
+			}
+		}catch (RuntimeException re) {
+			throw re;
+		}
+	}
+	
+	public void calculateBuildingScore(GbQ3 gbQ3){
+		BigDecimal w1 = new BigDecimal(0);
+		BigDecimal w2 = new BigDecimal(0);
+		BigDecimal w3 = new BigDecimal(0);
+		BigDecimal w4 = new BigDecimal(0);
+		BigDecimal w5 = new BigDecimal(0);
+		BigDecimal Q1 = new BigDecimal(0);
+		BigDecimal Q2 = new BigDecimal(0);
+		BigDecimal Q3 = new BigDecimal(0);
+		BigDecimal Q4 = new BigDecimal(0);
+		BigDecimal Q5 = new BigDecimal(0);
+		BigDecimal Q = new BigDecimal(0);
+		String nature;
+		String buildingLevel="";
+		try{
+			List<GbDesignevaluate> dList = findGbDesignevaluateById(gbQ3.getGbBuilding().getBuildingId());			
+			if(dList!=null){//已有设计评估得分记录则更新，否则新增设计评估得分记录
+				GbDesignevaluate de = dList.get(0);
+				w1 = de.getW1();
+				w2 = de.getW2();
+				w3 = de.getW3();
+				w4 = de.getW4();
+				w5 = de.getW5();
+				nature = de.getNature();
+				if(nature.equals("1")){//居住建筑
+					BigDecimal w1_xs = BigDecimal.valueOf(0.21);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					BigDecimal w2_xs = BigDecimal.valueOf(0.24);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					BigDecimal w3_xs = BigDecimal.valueOf(0.20);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					BigDecimal w4_xs = BigDecimal.valueOf(0.17);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					BigDecimal w5_xs = BigDecimal.valueOf(0.18);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
+				if(nature.equals("2")){//公共建筑
+					BigDecimal w1_xs = BigDecimal.valueOf(0.16);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					BigDecimal w2_xs = BigDecimal.valueOf(0.28);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					BigDecimal w3_xs = BigDecimal.valueOf(0.18);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					BigDecimal w4_xs = BigDecimal.valueOf(0.19);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					BigDecimal w5_xs = BigDecimal.valueOf(0.19);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
+				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
+				if(Q.doubleValue()>=80)
+					buildingLevel = "3";
+				if(Q.doubleValue()>=60 && Q.doubleValue()<80)
+					buildingLevel = "2";
+				if(Q.doubleValue()>=50 && Q.doubleValue()<60)
+					buildingLevel = "1";
+				if(Q.doubleValue()<40)
+					buildingLevel = "0";
+				
+				GbBuilding b = findGbBuildingById(gbQ3.getGbBuilding().getBuildingId());
+				b.setBuildingLevel(buildingLevel);
+				getHibernateTemplate().update(b);
+			}
+		}catch (RuntimeException re) {
+			throw re;
+		}
+	}
+	
+	public void calculateBuildingScore(GbQ4 gbQ4){
+		BigDecimal w1 = new BigDecimal(0);
+		BigDecimal w2 = new BigDecimal(0);
+		BigDecimal w3 = new BigDecimal(0);
+		BigDecimal w4 = new BigDecimal(0);
+		BigDecimal w5 = new BigDecimal(0);
+		BigDecimal Q1 = new BigDecimal(0);
+		BigDecimal Q2 = new BigDecimal(0);
+		BigDecimal Q3 = new BigDecimal(0);
+		BigDecimal Q4 = new BigDecimal(0);
+		BigDecimal Q5 = new BigDecimal(0);
+		BigDecimal Q = new BigDecimal(0);
+		String nature;
+		String buildingLevel="";
+		try{
+			List<GbDesignevaluate> dList = findGbDesignevaluateById(gbQ4.getGbBuilding().getBuildingId());			
+			if(dList!=null){//已有设计评估得分记录则更新，否则新增设计评估得分记录
+				GbDesignevaluate de = dList.get(0);
+				w1 = de.getW1();
+				w2 = de.getW2();
+				w3 = de.getW3();
+				w4 = de.getW4();
+				w5 = de.getW5();
+				nature = de.getNature();
+				if(nature.equals("1")){//居住建筑
+					BigDecimal w1_xs = BigDecimal.valueOf(0.21);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					BigDecimal w2_xs = BigDecimal.valueOf(0.24);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					BigDecimal w3_xs = BigDecimal.valueOf(0.20);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					BigDecimal w4_xs = BigDecimal.valueOf(0.17);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					BigDecimal w5_xs = BigDecimal.valueOf(0.18);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
+				if(nature.equals("2")){//公共建筑
+					BigDecimal w1_xs = BigDecimal.valueOf(0.16);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					BigDecimal w2_xs = BigDecimal.valueOf(0.28);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					BigDecimal w3_xs = BigDecimal.valueOf(0.18);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					BigDecimal w4_xs = BigDecimal.valueOf(0.19);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					BigDecimal w5_xs = BigDecimal.valueOf(0.19);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
+				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
+				if(Q.doubleValue()>=80)
+					buildingLevel = "3";
+				if(Q.doubleValue()>=60 && Q.doubleValue()<80)
+					buildingLevel = "2";
+				if(Q.doubleValue()>=50 && Q.doubleValue()<60)
+					buildingLevel = "1";
+				if(Q.doubleValue()<40)
+					buildingLevel = "0";
+				
+				GbBuilding b = findGbBuildingById(gbQ4.getGbBuilding().getBuildingId());
+				b.setBuildingLevel(buildingLevel);
+				getHibernateTemplate().update(b);
+			}
+		}catch (RuntimeException re) {
+			throw re;
+		}
+	}
+	
+	public void calculateBuildingScore(GbQ5 gbQ5){
+		BigDecimal w1 = new BigDecimal(0);
+		BigDecimal w2 = new BigDecimal(0);
+		BigDecimal w3 = new BigDecimal(0);
+		BigDecimal w4 = new BigDecimal(0);
+		BigDecimal w5 = new BigDecimal(0);
+		BigDecimal Q1 = new BigDecimal(0);
+		BigDecimal Q2 = new BigDecimal(0);
+		BigDecimal Q3 = new BigDecimal(0);
+		BigDecimal Q4 = new BigDecimal(0);
+		BigDecimal Q5 = new BigDecimal(0);
+		BigDecimal Q = new BigDecimal(0);
+		String nature;
+		String buildingLevel="";
+		try{
+			List<GbDesignevaluate> dList = findGbDesignevaluateById(gbQ5.getGbBuilding().getBuildingId());			
+			if(dList!=null){//已有设计评估得分记录则更新，否则新增设计评估得分记录
+				GbDesignevaluate de = dList.get(0);
+				w1 = de.getW1();
+				w2 = de.getW2();
+				w3 = de.getW3();
+				w4 = de.getW4();
+				w5 = de.getW5();
+				nature = de.getNature();
+				if(nature.equals("1")){//居住建筑
+					BigDecimal w1_xs = BigDecimal.valueOf(0.21);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					BigDecimal w2_xs = BigDecimal.valueOf(0.24);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					BigDecimal w3_xs = BigDecimal.valueOf(0.20);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					BigDecimal w4_xs = BigDecimal.valueOf(0.17);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					BigDecimal w5_xs = BigDecimal.valueOf(0.18);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
+				if(nature.equals("2")){//公共建筑
+					BigDecimal w1_xs = BigDecimal.valueOf(0.16);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					BigDecimal w2_xs = BigDecimal.valueOf(0.28);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					BigDecimal w3_xs = BigDecimal.valueOf(0.18);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					BigDecimal w4_xs = BigDecimal.valueOf(0.19);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					BigDecimal w5_xs = BigDecimal.valueOf(0.19);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
+				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
+				if(Q.doubleValue()>=80)
+					buildingLevel = "3";
+				if(Q.doubleValue()>=60 && Q.doubleValue()<80)
+					buildingLevel = "2";
+				if(Q.doubleValue()>=50 && Q.doubleValue()<60)
+					buildingLevel = "1";
+				if(Q.doubleValue()<40)
+					buildingLevel = "0";
+				
+				GbBuilding b = findGbBuildingById(gbQ5.getGbBuilding().getBuildingId());
+				b.setBuildingLevel(buildingLevel);
+				getHibernateTemplate().update(b);
+			}
+		}catch (RuntimeException re) {
 			throw re;
 		}
 	}
@@ -380,11 +875,15 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 	 */
 	@SuppressWarnings("unchecked")
 	public List<GbQ1> findGbQ1ById(String id){
-		List<GbQ1> bList = this.getHibernateTemplate().find("from GbQ1 where gbBuilding.buildingId='"+id+"'");
-		if(bList.size()==0){
-			return null;
+		try{
+			List<GbQ1> q1List = this.getHibernateTemplate().find("from GbQ1 where gbBuilding.buildingId='"+id+"'");
+			if(q1List.size()==0){
+				return null;
+			}
+			return q1List;
+		}catch (RuntimeException re) {
+			throw re;
 		}
-		return bList;
 	}
 	
 	/**
