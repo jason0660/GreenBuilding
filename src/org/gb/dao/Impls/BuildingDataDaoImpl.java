@@ -450,13 +450,13 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 						Q5 = BigDecimal.valueOf(0.00);
 				}
 				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
-				if(Q.doubleValue()>=80)
+				if(Q.doubleValue()>=80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "3";
-				if(Q.doubleValue()>=60 && Q.doubleValue()<80)
+				if(Q.doubleValue()>=60 && Q.doubleValue()<80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "2";
-				if(Q.doubleValue()>=50 && Q.doubleValue()<60)
+				if(Q.doubleValue()>=50 && Q.doubleValue()<60 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "1";
-				if(Q.doubleValue()<40)
+				if(Q.doubleValue()<50 || Q1.doubleValue()<40 || Q2.doubleValue()<40 || Q3.doubleValue()<40 || Q4.doubleValue()<40 || Q5.doubleValue()<40)
 					buildingLevel = "0";
 				
 				GbBuilding b = findGbBuildingById(gbQ1.getGbBuilding().getBuildingId());
@@ -547,13 +547,13 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 						Q5 = BigDecimal.valueOf(0.00);
 				}
 				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
-				if(Q.doubleValue()>=80)
+				if(Q.doubleValue()>=80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "3";
-				if(Q.doubleValue()>=60 && Q.doubleValue()<80)
+				if(Q.doubleValue()>=60 && Q.doubleValue()<80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "2";
-				if(Q.doubleValue()>=50 && Q.doubleValue()<60)
+				if(Q.doubleValue()>=50 && Q.doubleValue()<60 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "1";
-				if(Q.doubleValue()<40)
+				if(Q.doubleValue()<50 || Q1.doubleValue()<40 || Q2.doubleValue()<40 || Q3.doubleValue()<40 || Q4.doubleValue()<40 || Q5.doubleValue()<40)
 					buildingLevel = "0";
 				
 				GbBuilding b = findGbBuildingById(gbQ2.getGbBuilding().getBuildingId());
@@ -644,13 +644,13 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 						Q5 = BigDecimal.valueOf(0.00);
 				}
 				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
-				if(Q.doubleValue()>=80)
+				if(Q.doubleValue()>=80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "3";
-				if(Q.doubleValue()>=60 && Q.doubleValue()<80)
+				if(Q.doubleValue()>=60 && Q.doubleValue()<80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "2";
-				if(Q.doubleValue()>=50 && Q.doubleValue()<60)
+				if(Q.doubleValue()>=50 && Q.doubleValue()<60 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "1";
-				if(Q.doubleValue()<40)
+				if(Q.doubleValue()<50 || Q1.doubleValue()<40 || Q2.doubleValue()<40 || Q3.doubleValue()<40 || Q4.doubleValue()<40 || Q5.doubleValue()<40)
 					buildingLevel = "0";
 				
 				GbBuilding b = findGbBuildingById(gbQ3.getGbBuilding().getBuildingId());
@@ -741,13 +741,13 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 						Q5 = BigDecimal.valueOf(0.00);
 				}
 				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
-				if(Q.doubleValue()>=80)
+				if(Q.doubleValue()>=80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "3";
-				if(Q.doubleValue()>=60 && Q.doubleValue()<80)
+				if(Q.doubleValue()>=60 && Q.doubleValue()<80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "2";
-				if(Q.doubleValue()>=50 && Q.doubleValue()<60)
+				if(Q.doubleValue()>=50 && Q.doubleValue()<60 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "1";
-				if(Q.doubleValue()<40)
+				if(Q.doubleValue()<50 || Q1.doubleValue()<40 || Q2.doubleValue()<40 || Q3.doubleValue()<40 || Q4.doubleValue()<40 || Q5.doubleValue()<40)
 					buildingLevel = "0";
 				
 				GbBuilding b = findGbBuildingById(gbQ4.getGbBuilding().getBuildingId());
@@ -838,13 +838,13 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 						Q5 = BigDecimal.valueOf(0.00);
 				}
 				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
-				if(Q.doubleValue()>=80)
+				if(Q.doubleValue()>=80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "3";
-				if(Q.doubleValue()>=60 && Q.doubleValue()<80)
+				if(Q.doubleValue()>=60 && Q.doubleValue()<80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "2";
-				if(Q.doubleValue()>=50 && Q.doubleValue()<60)
+				if(Q.doubleValue()>=50 && Q.doubleValue()<60 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "1";
-				if(Q.doubleValue()<40)
+				if(Q.doubleValue()<50 || Q1.doubleValue()<40 || Q2.doubleValue()<40 || Q3.doubleValue()<40 || Q4.doubleValue()<40 || Q5.doubleValue()<40)
 					buildingLevel = "0";
 				
 				GbBuilding b = findGbBuildingById(gbQ5.getGbBuilding().getBuildingId());

@@ -176,7 +176,7 @@
 	        		}
 	        	},
 	        	error: function(XMLResponse){
-	        		alert("qError!!");
+	        		alert("qError!");
 	        	}	
 	   	    });
 		}

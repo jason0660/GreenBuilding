@@ -73,7 +73,7 @@
 	                    <a href="#"><i class="fa fa-flash "></i>节能与能源利用<span class="fa arrow"></span></a>
 	                    <ul class="nav nav-second-level">
 	                        <li>
-	                            <a href="#">建筑与围护结构</a>
+	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/buildingEnvelope.jsp')">建筑与围护结构</a>
 	                        </li>
 	                        <li>
 	                            <a href="#">供暖、通风与空调</a>

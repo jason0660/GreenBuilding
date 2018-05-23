@@ -33,6 +33,9 @@
 		<action name="saveQ1Data" class="org.gb.action.BuildingDataAction" method="saveQ1Data">
 			<result name="success">/jsp/trafficFacilityPublicService.jsp</result> 
 		</action>
+		<action name="saveQ2Data" class="org.gb.action.BuildingDataAction" method="saveQ2Data">
+			<result name="success">/jsp/buildingEnvelope.jsp</result> 
+		</action>
 	</package>
 
 	
