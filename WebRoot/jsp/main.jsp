@@ -95,7 +95,7 @@
 		}
 	</script>
 </head>
-<body onload="getBuilding();">
+<body onload="getBuilding();" style="border:0px solid #F00;width:99%;">
 	<div class="row" style="border:0px solid #F00;">
         <div class="col-md-12">
             <h1 class="page-head-line">绿色建筑设计评估管理</h1>

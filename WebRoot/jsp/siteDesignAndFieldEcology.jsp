@@ -182,7 +182,7 @@
 		}
 	</script>
 </head>
-<body onload="getBuilding();">
+<body onload="getBuilding();" style="border:0px solid #F00;width:99%;">
 	<div class="row" style="border:0px solid #F00;">
         <div class="col-md-12">
             <h1 class="page-head-line">场地设计与场地生态</h1>
@@ -209,8 +209,8 @@
            		<b>结合现状地形地貌进行场地设计与建筑布局，保护场地内原有的自然水域、湿地和植被，采取表层土利用等生态补偿措施</b>
            	</td>		             
            	<td colspan="2" align="left">
-          		<input type="radio" name="radio_cdsjyjzbj" value="1">是</input><br/>
-           		<input type="radio" name="radio_cdsjyjzbj" value="2">否</input>
+          		<input type="radio" name="radio_cdsjyjzbj" value="1">满足</input><br/>
+           		<input type="radio" name="radio_cdsjyjzbj" value="2">不满足</input>
            	</td>
         </tr>
         <tr style="height:5px">
@@ -221,8 +221,8 @@
            		下凹式绿地、雨水花园等有调蓄雨水功能的绿地和水体的面积之和占绿地面积的比例达到30%
            	</td>
            	<td>
-           		<input type="radio" name="radio_txsgnldzbdb" value="1">是</input><br/>
-           		<input type="radio" name="radio_txsgnldzbdb" value="2">否</input>
+           		<input type="radio" name="radio_txsgnldzbdb" value="1">满足</input><br/>
+           		<input type="radio" name="radio_txsgnldzbdb" value="2">不满足</input>
            	</td>
         </tr>
         <tr style="height:2px">
@@ -230,8 +230,8 @@
            		合理衔接和引导屋面雨水、道路雨水进入地面生态设施，并采取相应的径流污染控制措施
            	</td>
            	<td>
-           		<input type="radio" name="radio_ysjrdmstss" value="1">是</input><br/>
-           		<input type="radio" name="radio_ysjrdmstss" value="2">否</input>
+           		<input type="radio" name="radio_ysjrdmstss" value="1">满足</input><br/>
+           		<input type="radio" name="radio_ysjrdmstss" value="2">不满足</input>
            	</td>
         </tr>
         <tr style="height:2px">
@@ -239,8 +239,8 @@
            		硬质铺装地面中透水铺装面积的比例达到50%
            	</td>
            	<td>
-           		<input type="radio" name="radio_tspzmjdb" value="1">是</input><br/>
-           		<input type="radio" name="radio_tspzmjdb" value="2">否</input>
+           		<input type="radio" name="radio_tspzmjdb" value="1">满足</input><br/>
+           		<input type="radio" name="radio_tspzmjdb" value="2">不满足</input>
            	</td>
         </tr>
         <tr style="height:5px">
@@ -260,8 +260,8 @@
            		种植适应当地气候和土壤条件的植物，采用乔、灌、草结合的复层绿化，种植区域覆土深度和排水能力满足植物生长需求
            	</td>
            	<td>
-           		<input type="radio" name="radio_lhdb" value="1">是</input><br/>
-           		<input type="radio" name="radio_lhdb" value="2">否</input>
+           		<input type="radio" name="radio_lhdb" value="1">满足</input><br/>
+           		<input type="radio" name="radio_lhdb" value="2">不满足</input>
            	</td>
         </tr>
         <tr style="height:2px">

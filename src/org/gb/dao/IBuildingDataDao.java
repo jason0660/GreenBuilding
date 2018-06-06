@@ -3,6 +3,7 @@ package org.gb.dao;
 import java.util.List;
 
 import org.gb.entity.GbBuilding;
+import org.gb.entity.GbBuildingdrawing;
 import org.gb.entity.GbDesignevaluate;
 import org.gb.entity.GbQ1;
 import org.gb.entity.GbQ2;
@@ -16,6 +17,12 @@ public interface IBuildingDataDao {
 	 * @param gbBuilding
 	 */
 	public void addGbBuilding(GbBuilding gbBuilding);
+	
+	/**
+	 * 新增建筑图纸信息
+	 * @param gbBuildingDrawing
+	 */
+	public void addGbBuildingDrawing(GbBuildingdrawing gbBuildingDrawing);
 	
 	/**
 	 * 查询所有建筑
@@ -42,6 +49,24 @@ public interface IBuildingDataDao {
 	public void addGbQ2(GbQ2 gbQ2);
 	
 	/**
+	 * 新增节能与能源利用得分
+	 * @return
+	 */
+	public void addGbQ3(GbQ3 gbQ3);
+	
+	/**
+	 * 新增节能与能源利用得分
+	 * @return
+	 */
+	public void addGbQ4(GbQ4 gbQ4);
+	
+	/**
+	 * 新增节能与能源利用得分
+	 * @return
+	 */
+	public void addGbQ5(GbQ5 gbQ5);
+	
+	/**
 	 * 更新节地与室外环境得分
 	 * @return
 	 */
@@ -52,6 +77,24 @@ public interface IBuildingDataDao {
 	 * @return
 	 */
 	public void updateGbQ2(GbQ2 gbQ2);
+	
+	/**
+	 * 更新节能与能源利用得分
+	 * @return
+	 */
+	public void updateGbQ3(GbQ3 gbQ3);
+	
+	/**
+	 * 更新节能与能源利用得分
+	 * @return
+	 */
+	public void updateGbQ4(GbQ4 gbQ4);
+	
+	/**
+	 * 更新节能与能源利用得分
+	 * @return
+	 */
+	public void updateGbQ5(GbQ5 gbQ5);
 	
 	/**
 	 * 更新设计评估得分
@@ -86,6 +129,12 @@ public interface IBuildingDataDao {
 	 * @return
 	 */
 	public GbBuilding findGbBuildingById(String id);
+	
+	/**
+	 * 根据ID查询建筑图纸信息
+	 * @return
+	 */
+	public GbBuildingdrawing findGbBuildingdrawingById(String id);
 	
 	/**
 	 * 根据BuildingID查询Q1

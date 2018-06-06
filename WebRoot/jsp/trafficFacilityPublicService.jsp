@@ -177,7 +177,7 @@
 		}
 	</script>
 </head>
-<body onload="getBuilding();">
+<body onload="getBuilding();" style="border:0px solid #F00;width:99%;">
 	<div class="row" style="border:0px solid #F00;">
         <div class="col-md-12">
             <h1 class="page-head-line">交通设施与公共服务</h1>
@@ -214,8 +214,8 @@
            		<b>场地内人行通道采用无障碍设计情况</b>
            	</td>
            	<td colspan="2">
-           		<input type="radio" name="radio_wzasj" value="1">是</input><br/>
-           		<input type="radio" name="radio_wzasj" value="2">否</input>
+           		<input type="radio" name="radio_wzasj" value="1">满足</input><br/>
+           		<input type="radio" name="radio_wzasj" value="2">不满足</input>
            	</td>
         </tr>
         <tr style="height:5px">
@@ -226,8 +226,8 @@
            		自行车停车设施位置合理、方便出入，且有遮阳防雨措施
            	</td>
            	<td>
-           		<input type="radio" name="radio_zxctcss" value="1">是</input><br/>
-           		<input type="radio" name="radio_zxctcss" value="2">否</input>
+           		<input type="radio" name="radio_zxctcss" value="1">满足</input><br/>
+           		<input type="radio" name="radio_zxctcss" value="2">不满足</input>
            	</td>
         </tr>
         <tr style="height:2px">

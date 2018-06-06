@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.gb.dao.IBuildingDataDao;
 import org.gb.entity.GbBuilding;
+import org.gb.entity.GbBuildingdrawing;
 import org.gb.entity.GbDesignevaluate;
 import org.gb.entity.GbQ1;
 import org.gb.entity.GbQ2;
@@ -31,6 +32,20 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 	public void addGbBuilding(GbBuilding gbBuilding){
 		try{
 			getHibernateTemplate().save(gbBuilding);
+			log.debug("save successful");
+		}catch (RuntimeException re) {
+			log.error("save failed", re);
+			throw re;
+		}
+	}
+	
+	/**
+	 * 新增建筑图纸信息
+	 * @param gbBuildingDrawing
+	 */
+	public void addGbBuildingDrawing(GbBuildingdrawing gbBuildingDrawing){
+		try{
+			getHibernateTemplate().save(gbBuildingDrawing);
 			log.debug("save successful");
 		}catch (RuntimeException re) {
 			log.error("save failed", re);
@@ -100,6 +115,54 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 	}
 	
 	/**
+	 * 新增节能与能源利用得分
+	 * @param gbQ3
+	 */
+	public void addGbQ3(GbQ3 gbQ3){
+		try{
+			getHibernateTemplate().save(gbQ3);
+			log.debug("save successful");
+		}catch (RuntimeException re) {
+			log.error("save failed", re);
+			throw re;
+		}
+		
+		updateGbDesignevaluate(gbQ3);
+	}
+	
+	/**
+	 * 新增节能与能源利用得分
+	 * @param gbQ4
+	 */
+	public void addGbQ4(GbQ4 gbQ4){
+		try{
+			getHibernateTemplate().save(gbQ4);
+			log.debug("save successful");
+		}catch (RuntimeException re) {
+			log.error("save failed", re);
+			throw re;
+		}
+		
+		updateGbDesignevaluate(gbQ4);
+	}
+	
+	/**
+	 * 新增节能与能源利用得分
+	 * @param gbQ5
+	 */
+	public void addGbQ5(GbQ5 gbQ5){
+		try{
+			getHibernateTemplate().save(gbQ5);
+			log.debug("save successful");
+		}catch (RuntimeException re) {
+			log.error("save failed", re);
+			throw re;
+		}
+		
+		updateGbDesignevaluate(gbQ5);
+	}
+	
+	/**
 	 * 更新节地与室外环境得分
 	 * @param gbQ1
 	 */
@@ -159,6 +222,93 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 		}
 		
 		updateGbDesignevaluate(gbQ2);
+	}
+	
+	/**
+	 * 更新节水与水资源利用得分
+	 * @param gbQ3
+	 */
+	public void updateGbQ3(GbQ3 gbQ3){
+		String id;
+		id = gbQ3.getGbBuilding().getBuildingId();
+		List<GbQ3> q3List = findGbQ3ById(id);
+		if(q3List!=null){
+			GbQ3 gbQ3_old = gbQ3;
+			gbQ3 = q3List.get(0);
+			if(gbQ3_old.getJsxtdf()!=null)
+				gbQ3.setJsxtdf(gbQ3_old.getJsxtdf());//本次提交了节水系统得分
+			if(gbQ3_old.getJsqjysbdf()!=null)
+				gbQ3.setJsqjysbdf(gbQ3_old.getJsqjysbdf());//本次提交了节水器具与设备得分
+			if(gbQ3_old.getFctsylydf()!=null)
+				gbQ3.setFctsylydf(gbQ3_old.getFctsylydf());//本次提交了非传统水源利用得分
+		}
+		try{
+			getHibernateTemplate().update(gbQ3);
+			log.debug("save successful");
+		}catch (RuntimeException re) {
+			log.error("save failed", re);
+			throw re;
+		}
+		
+		updateGbDesignevaluate(gbQ3);
+	}
+	
+	/**
+	 * 更新节材与材料资源利用得分
+	 * @param gbQ4
+	 */
+	public void updateGbQ4(GbQ4 gbQ4){
+		String id;
+		id = gbQ4.getGbBuilding().getBuildingId();
+		List<GbQ4> q4List = findGbQ4ById(id);
+		if(q4List!=null){
+			GbQ4 gbQ4_old = gbQ4;
+			gbQ4 = q4List.get(0);
+			if(gbQ4_old.getJcsjdf()!=null)
+				gbQ4.setJcsjdf(gbQ4_old.getJcsjdf());//本次提交了节材设计得分
+			if(gbQ4_old.getClxydf()!=null)
+				gbQ4.setClxydf(gbQ4_old.getClxydf());//本次提交了材料选用得分
+		}
+		try{
+			getHibernateTemplate().update(gbQ4);
+			log.debug("save successful");
+		}catch (RuntimeException re) {
+			log.error("save failed", re);
+			throw re;
+		}
+		
+		updateGbDesignevaluate(gbQ4);
+	}
+	
+	/**
+	 * 更新室内环境质量得分
+	 * @param gbQ5
+	 */
+	public void updateGbQ5(GbQ5 gbQ5){
+		String id;
+		id = gbQ5.getGbBuilding().getBuildingId();
+		List<GbQ5> q5List = findGbQ5ById(id);
+		if(q5List!=null){
+			GbQ5 gbQ5_old = gbQ5;
+			gbQ5 = q5List.get(0);
+			if(gbQ5_old.getSnshjdf()!=null)
+				gbQ5.setSnshjdf(gbQ5_old.getSnshjdf());//本次提交了室内声环境得分
+			if(gbQ5_old.getSnghjysydf()!=null)
+				gbQ5.setSnghjysydf(gbQ5_old.getSnghjysydf());//本次提交了室内光环境与视野得分
+			if(gbQ5_old.getSnrshjdf()!=null)
+				gbQ5.setSnrshjdf(gbQ5_old.getSnrshjdf());//本次提交了室内热湿环境得分
+			if(gbQ5_old.getSnkqzldf()!=null)
+				gbQ5.setSnkqzldf(gbQ5_old.getSnkqzldf());//本次提交了室内空气质量得分
+		}
+		try{
+			getHibernateTemplate().update(gbQ5);
+			log.debug("save successful");
+		}catch (RuntimeException re) {
+			log.error("save failed", re);
+			throw re;
+		}
+		
+		updateGbDesignevaluate(gbQ5);
 	}
 	
 	/**
@@ -449,6 +599,47 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 					else
 						Q5 = BigDecimal.valueOf(0.00);
 				}
+				if(nature.equals("3")){//单体建筑
+					BigDecimal w1_xs_jz = BigDecimal.valueOf(0.21);
+					BigDecimal w1_xs_gg = BigDecimal.valueOf(0.16);
+					BigDecimal w1_xs_dt = w1_xs_jz.add(w1_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs_dt);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w2_xs_jz = BigDecimal.valueOf(0.24);
+					BigDecimal w2_xs_gg = BigDecimal.valueOf(0.28);
+					BigDecimal w2_xs_dt = w2_xs_jz.add(w2_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs_dt);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w3_xs_jz = BigDecimal.valueOf(0.20);
+					BigDecimal w3_xs_gg = BigDecimal.valueOf(0.18);
+					BigDecimal w3_xs_dt = w3_xs_jz.add(w3_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs_dt);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w4_xs_jz = BigDecimal.valueOf(0.17);
+					BigDecimal w4_xs_gg = BigDecimal.valueOf(0.19);
+					BigDecimal w4_xs_dt = w4_xs_jz.add(w4_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs_dt);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w5_xs_jz = BigDecimal.valueOf(0.18);
+					BigDecimal w5_xs_gg = BigDecimal.valueOf(0.19);
+					BigDecimal w5_xs_dt = w5_xs_jz.add(w5_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs_dt);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
 				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
 				if(Q.doubleValue()>=80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "3";
@@ -543,6 +734,47 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 					BigDecimal w5_xs = BigDecimal.valueOf(0.19);
 					if(w5!=null)
 						Q5 = w5.multiply(w5_xs);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
+				if(nature.equals("3")){//单体建筑
+					BigDecimal w1_xs_jz = BigDecimal.valueOf(0.21);
+					BigDecimal w1_xs_gg = BigDecimal.valueOf(0.16);
+					BigDecimal w1_xs_dt = w1_xs_jz.add(w1_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs_dt);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w2_xs_jz = BigDecimal.valueOf(0.24);
+					BigDecimal w2_xs_gg = BigDecimal.valueOf(0.28);
+					BigDecimal w2_xs_dt = w2_xs_jz.add(w2_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs_dt);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w3_xs_jz = BigDecimal.valueOf(0.20);
+					BigDecimal w3_xs_gg = BigDecimal.valueOf(0.18);
+					BigDecimal w3_xs_dt = w3_xs_jz.add(w3_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs_dt);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w4_xs_jz = BigDecimal.valueOf(0.17);
+					BigDecimal w4_xs_gg = BigDecimal.valueOf(0.19);
+					BigDecimal w4_xs_dt = w4_xs_jz.add(w4_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs_dt);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w5_xs_jz = BigDecimal.valueOf(0.18);
+					BigDecimal w5_xs_gg = BigDecimal.valueOf(0.19);
+					BigDecimal w5_xs_dt = w5_xs_jz.add(w5_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs_dt);
 					else
 						Q5 = BigDecimal.valueOf(0.00);
 				}
@@ -643,6 +875,47 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 					else
 						Q5 = BigDecimal.valueOf(0.00);
 				}
+				if(nature.equals("3")){//单体建筑
+					BigDecimal w1_xs_jz = BigDecimal.valueOf(0.21);
+					BigDecimal w1_xs_gg = BigDecimal.valueOf(0.16);
+					BigDecimal w1_xs_dt = w1_xs_jz.add(w1_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs_dt);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w2_xs_jz = BigDecimal.valueOf(0.24);
+					BigDecimal w2_xs_gg = BigDecimal.valueOf(0.28);
+					BigDecimal w2_xs_dt = w2_xs_jz.add(w2_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs_dt);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w3_xs_jz = BigDecimal.valueOf(0.20);
+					BigDecimal w3_xs_gg = BigDecimal.valueOf(0.18);
+					BigDecimal w3_xs_dt = w3_xs_jz.add(w3_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs_dt);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w4_xs_jz = BigDecimal.valueOf(0.17);
+					BigDecimal w4_xs_gg = BigDecimal.valueOf(0.19);
+					BigDecimal w4_xs_dt = w4_xs_jz.add(w4_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs_dt);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w5_xs_jz = BigDecimal.valueOf(0.18);
+					BigDecimal w5_xs_gg = BigDecimal.valueOf(0.19);
+					BigDecimal w5_xs_dt = w5_xs_jz.add(w5_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs_dt);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
 				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
 				if(Q.doubleValue()>=80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "3";
@@ -737,6 +1010,47 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 					BigDecimal w5_xs = BigDecimal.valueOf(0.19);
 					if(w5!=null)
 						Q5 = w5.multiply(w5_xs);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
+				if(nature.equals("3")){//单体建筑
+					BigDecimal w1_xs_jz = BigDecimal.valueOf(0.21);
+					BigDecimal w1_xs_gg = BigDecimal.valueOf(0.16);
+					BigDecimal w1_xs_dt = w1_xs_jz.add(w1_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs_dt);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w2_xs_jz = BigDecimal.valueOf(0.24);
+					BigDecimal w2_xs_gg = BigDecimal.valueOf(0.28);
+					BigDecimal w2_xs_dt = w2_xs_jz.add(w2_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs_dt);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w3_xs_jz = BigDecimal.valueOf(0.20);
+					BigDecimal w3_xs_gg = BigDecimal.valueOf(0.18);
+					BigDecimal w3_xs_dt = w3_xs_jz.add(w3_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs_dt);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w4_xs_jz = BigDecimal.valueOf(0.17);
+					BigDecimal w4_xs_gg = BigDecimal.valueOf(0.19);
+					BigDecimal w4_xs_dt = w4_xs_jz.add(w4_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs_dt);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w5_xs_jz = BigDecimal.valueOf(0.18);
+					BigDecimal w5_xs_gg = BigDecimal.valueOf(0.19);
+					BigDecimal w5_xs_dt = w5_xs_jz.add(w5_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs_dt);
 					else
 						Q5 = BigDecimal.valueOf(0.00);
 				}
@@ -837,6 +1151,47 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 					else
 						Q5 = BigDecimal.valueOf(0.00);
 				}
+				if(nature.equals("3")){//单体建筑
+					BigDecimal w1_xs_jz = BigDecimal.valueOf(0.21);
+					BigDecimal w1_xs_gg = BigDecimal.valueOf(0.16);
+					BigDecimal w1_xs_dt = w1_xs_jz.add(w1_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w1!=null)
+						Q1 = w1.multiply(w1_xs_dt);
+					else
+						Q1 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w2_xs_jz = BigDecimal.valueOf(0.24);
+					BigDecimal w2_xs_gg = BigDecimal.valueOf(0.28);
+					BigDecimal w2_xs_dt = w2_xs_jz.add(w2_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w2!=null)
+						Q2 = w2.multiply(w2_xs_dt);
+					else
+						Q2 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w3_xs_jz = BigDecimal.valueOf(0.20);
+					BigDecimal w3_xs_gg = BigDecimal.valueOf(0.18);
+					BigDecimal w3_xs_dt = w3_xs_jz.add(w3_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w3!=null)
+						Q3 = w3.multiply(w3_xs_dt);
+					else
+						Q3 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w4_xs_jz = BigDecimal.valueOf(0.17);
+					BigDecimal w4_xs_gg = BigDecimal.valueOf(0.19);
+					BigDecimal w4_xs_dt = w4_xs_jz.add(w4_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w4!=null)
+						Q4 = w4.multiply(w4_xs_dt);
+					else
+						Q4 = BigDecimal.valueOf(0.00);
+					
+					BigDecimal w5_xs_jz = BigDecimal.valueOf(0.18);
+					BigDecimal w5_xs_gg = BigDecimal.valueOf(0.19);
+					BigDecimal w5_xs_dt = w5_xs_jz.add(w5_xs_gg).divide(BigDecimal.valueOf(2),2, BigDecimal.ROUND_UP);
+					if(w5!=null)
+						Q5 = w5.multiply(w5_xs_dt);
+					else
+						Q5 = BigDecimal.valueOf(0.00);
+				}
 				Q = Q1.add(Q2).add(Q3).add(Q4).add(Q5);
 				if(Q.doubleValue()>=80 && Q1.doubleValue()>40 && Q2.doubleValue()>40 && Q3.doubleValue()>40 && Q4.doubleValue()>40 && Q5.doubleValue()>40)
 					buildingLevel = "3";
@@ -863,6 +1218,19 @@ public class BuildingDataDaoImpl extends HibernateDaoSupport implements IBuildin
 	@SuppressWarnings("unchecked")
 	public GbBuilding findGbBuildingById(String id){
 		List<GbBuilding> bList = this.getHibernateTemplate().find("from GbBuilding where buildingId='"+id+"'");
+		if(bList.size()==0){
+			return null;
+		}
+		return bList.get(0);
+	}
+	
+	/**
+	 * 根据ID查询建筑图纸信息
+	 * @param id
+	 */
+	@SuppressWarnings("unchecked")
+	public GbBuildingdrawing findGbBuildingdrawingById(String id){
+		List<GbBuildingdrawing> bList = this.getHibernateTemplate().find("from GbBuildingdrawing where gbBuilding.buildingId='"+id+"'");
 		if(bList.size()==0){
 			return null;
 		}

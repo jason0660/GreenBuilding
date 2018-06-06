@@ -76,13 +76,13 @@
 	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/buildingEnvelope.jsp')">建筑与围护结构</a>
 	                        </li>
 	                        <li>
-	                            <a href="#">供暖、通风与空调</a>
+	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/heatingVentilateAircondition.jsp')">供暖、通风与空调</a>
 	                        </li>
 	                        <li>
-	                            <a href="#">照明与电气</a>
+	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/lightingAndElectric.jsp')">照明与电气</a>
 	                        </li>
 	                        <li>
-	                            <a href="#">能量综合利用</a>
+	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/energyComprehensiveUtilize.jsp')">能量综合利用</a>
 	                        </li>
 	                    </ul>
 	                </li>
@@ -91,13 +91,13 @@
 	                    <a href="#"><i class="fa fa-bicycle "></i>节水与水资源利用<span class="fa arrow"></span></a>
 	                    <ul class="nav nav-second-level">
 	                        <li>
-	                            <a href="#">节水系统</a>
+	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/saveWaterSystem.jsp')">节水系统</a>
 	                        </li>
 	                        <li>
-	                            <a href="#">节水器具与设备</a>
+	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/saveWaterToolAndDevice.jsp')">节水器具与设备</a>
 	                        </li>
 	                        <li>
-	                            <a href="#">非传统水源利用</a>
+	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/nontraditionalWaterSourceUtilize.jsp')">非传统水源利用</a>
 	                        </li>
 	                    </ul>
 	                </li>
@@ -106,10 +106,10 @@
 	                    <a href="#"><i class="fa fa-anchor "></i>节材与材料资源利用<span class="fa arrow"></span></a>
 	                    <ul class="nav nav-second-level">
 	                        <li>
-	                            <a href="#">节材设计</a>
+	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/saveMaterial.jsp')">节材设计</a>
 	                        </li>
 	                        <li>
-	                            <a href="#">材料选用</a>
+	                            <a href="#" onclick="changeFrameSrc('/GreenBuilding/jsp/materialChoose.jsp')">材料选用</a>
 	                        </li>
 	                    </ul>
 	                </li>
@@ -180,7 +180,7 @@
         <div id="page-wrapper" style="border:0px solid #F60;">
             <div id="page-inner" style="border:0px solid #F30;">
                 <div style="border:0px solid #F00;width:100%;height:728px;">
-                	<iframe id="content" frameborder="0" scrolling="no" style="width:100%;height:100%" src="/GreenBuilding/jsp/main.jsp"></iframe>
+                	<iframe id="content" frameborder="0" scrolling="auto" style="width:100%;height:100%" src="/GreenBuilding/jsp/main.jsp"></iframe>
                 </div>
                 <!-- /. ROW  -->
             </div>

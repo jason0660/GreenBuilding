@@ -157,7 +157,7 @@
 		}
 	</script>
 </head>
-<body onload="getBuilding();">
+<body onload="getBuilding();" style="border:0px solid #F00;width:99%;">
 	<div class="row" style="border:0px solid #F00;">
         <div class="col-md-12">
             <h1 class="page-head-line">建筑与围护结构</h1>
@@ -184,8 +184,8 @@
            		<b>结合场地自然条件，对建筑的体形、朝向、楼距、窗墙比等进行优化设计</b>
            	</td>		             
            	<td colspan="2" align="left">
-          		<input type="radio" name="radio_yhsj" value="1">是</input><br/>
-           		<input type="radio" name="radio_yhsj" value="2">否</input>
+          		<input type="radio" name="radio_yhsj" value="1">满足</input><br/>
+           		<input type="radio" name="radio_yhsj" value="2">不满足</input>
            	</td>
         </tr>
         <tr style="height:5px">

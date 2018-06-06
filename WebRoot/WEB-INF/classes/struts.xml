@@ -15,6 +15,9 @@
 			<result name="success">/jsp/landUtilize.jsp</result> 
 			<result name="success">/jsp/main.jsp</result> 
 		</action>
+		<action name="getLandUtilizeData" class="org.gb.action.BuildingDataAction" method="getLandUtilizeData">
+			<result name="success">/jsp/landUtilize.jsp</result> 
+		</action>
 		<action name="getBuildingByNature" class="org.gb.action.BuildingDataAction" method="getBuildingByNature">
 			<result name="success">/jsp/landUtilize.jsp</result> 
 		</action>
@@ -35,6 +38,12 @@
 		</action>
 		<action name="saveQ2Data" class="org.gb.action.BuildingDataAction" method="saveQ2Data">
 			<result name="success">/jsp/buildingEnvelope.jsp</result> 
+		</action>
+		<action name="saveQ3Data" class="org.gb.action.BuildingDataAction" method="saveQ3Data">
+			<result name="success">/jsp/saveWaterSystem.jsp</result> 
+		</action>
+		<action name="saveQ4Data" class="org.gb.action.BuildingDataAction" method="saveQ4Data">
+			<result name="success">/jsp/saveMaterial.jsp</result> 
 		</action>
 	</package>
 
